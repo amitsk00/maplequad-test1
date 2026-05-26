@@ -22,7 +22,7 @@ echo -e "${BLUE}Pruning dangling Docker images to keep things clean...${NC}"
 docker image prune -f
 
 echo -e "${GREEN}Building the Docker image...${NC}"
-docker build -t $IMAGE_NAME1 .
+docker build -t $IMAGE_NAME1 ..
 
 
 echo -e "${YELLOW}waiting for 10 seconds...${NC}"

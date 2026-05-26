@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e 
 
 if [[  -f ../params.sh ]]; then 
     source ../params.sh
@@ -22,7 +23,7 @@ echo -e "${BLUE}Pruning dangling Docker images to keep things clean...${NC}"
 docker image prune -f
 
 echo -e "${GREEN}Building the Docker image...${NC}"
-docker build -t $IMAGE_NAME2 .
+docker build -t $IMAGE_NAME2 -f Dockerfile ..
 
 
 echo -e "${YELLOW}waiting for 10 seconds...${NC}"
