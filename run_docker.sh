@@ -14,9 +14,33 @@ docker image prune -f
 echo "Building the Docker image..."
 docker build -t $IMAGE_NAME .
 
+
+echo -e "waiting for 10 seconds"
+sleep 10
+
 echo "Running the Docker container..."
 docker run -d --name $CONTAINER_NAME -p $LOCAL_PORT:$CONTAINER_PORT $IMAGE_NAME
 
 
+sleep 10
 
-AR_NAME="europe-west1-docker.pkg.dev/fraud-maplequad/test1"
+
+
+REGION="europe-west1"
+AR_REGISTRY="${REGION}-docker.pkg.dev"
+PROJECT_ID="fraud-maplequad"
+REPO_NAME="test1"
+AR_NAME="${AR_REGISTRY}/${PROJECT_ID}/${REPO_NAME}"
+
+gcloud auth configure-docker $REGION-docker.pkg.dev
+
+# Tag the image for GAR
+docker tag "${IMAGE_NAME}:latest"  "${AR_NAME}/${IMAGE_NAME}:latest"
+
+# Push it to the cloud
+docker push    "${AR_NAME}/${IMAGE_NAME}:latest"
+
+if [[ $? -eq "0" ]]; then 
+    echo -e "pushed to GAR"
+
+fi 
