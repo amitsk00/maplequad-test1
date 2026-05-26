@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-if [[  -f ./params.sh ]]; then 
-    source ./params.sh
+if [[  -f ../params.sh ]]; then 
+    source ../params.sh
 
 else 
     echo -e "${RED}params file missing ... exiting$ {NC}"
