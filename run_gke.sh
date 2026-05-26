@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e 
+
 if [[  -f ./params.sh ]]; then 
     source ./params.sh
 
@@ -24,13 +26,16 @@ kubectl apply -f gke-app/deployment.yaml
 kubectl apply -f gke-app/service.yaml
 
 
+echo "--------------------------------------------------"
+echo -e "checking the recently created objects"
 kubectl get pods -n ${NAMESPACE}
 kubectl get service ${SERVICE_NAME} -n ${NAMESPACE}
+echo "--------------------------------------------------"
 
 
 
 
-echo "Waiting for GKE to allocate an External IP..."
+echo -e "Waiting for GKE to allocate an External IP..."
 
 # Loop until the External IP is no longer empty or "pending"
 EXTERNAL_IP=""
