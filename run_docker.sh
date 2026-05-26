@@ -1,9 +1,19 @@
 #!/bin/bash
 
-CONTAINER_NAME="my1-app1"
-IMAGE_NAME="my1-app"
-LOCAL_PORT="8000"
-CONTAINER_PORT="8000"
+
+if [[  -f ./params.sh ]]; then 
+    source ./params.sh
+
+else 
+    echo -e "params file missing ... exiting"
+    exit 9
+
+fi 
+
+# CONTAINER_NAME="my1-app1"
+# IMAGE_NAME="my1-app"
+# LOCAL_PORT="8000"
+# CONTAINER_PORT="8000"
 
 echo "Stopping and removing existing container..."
 docker rm -f $CONTAINER_NAME 2>/dev/null || true
@@ -26,11 +36,11 @@ sleep 10
 
 
 
-REGION="europe-west1"
-AR_REGISTRY="${REGION}-docker.pkg.dev"
-PROJECT_ID="fraud-maplequad"
-REPO_NAME="test1"
-AR_NAME="${AR_REGISTRY}/${PROJECT_ID}/${REPO_NAME}"
+# REGION="europe-west1"
+# AR_REGISTRY="${REGION}-docker.pkg.dev"
+# PROJECT_ID="fraud-maplequad"
+# REPO_NAME="test1"
+# AR_NAME="${AR_REGISTRY}/${PROJECT_ID}/${REPO_NAME}"
 
 gcloud auth configure-docker $REGION-docker.pkg.dev
 
@@ -44,3 +54,4 @@ if [[ $? -eq "0" ]]; then
     echo -e "pushed to GAR"
 
 fi 
+

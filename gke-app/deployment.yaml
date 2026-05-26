@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app1
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: my-app1
+  template:
+    metadata:
+      labels:
+        app: my-app1
+    spec:
+      containers:
+      - name: my-app1
+        image: europe-west1-docker.pkg.dev/fraud-maplequad/test1/my1-app:latest
+        ports:
+        - containerPort: 8000
+
