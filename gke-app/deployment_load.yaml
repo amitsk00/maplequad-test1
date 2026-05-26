@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: load-gen-depl
+  namespace: amit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: load-gen-label
+  template:
+    metadata:
+      labels:
+        app: load-gen-label
+    spec:
+      containers:
+      - name: load-gen-cont
+        image: europe-west1-docker.pkg.dev/fraud-maplequad/test1/load-gen-img:latest
+        ports:
+        - containerPort: 8002
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
