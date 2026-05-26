@@ -35,7 +35,7 @@ docker run -d --name $CONTAINER_NAME2 -p $LOCAL_PORT2:$CONTAINER_PORT2 $IMAGE_NA
 
 sleep 10
 
-exit 
+ 
 
 # REGION="europe-west1"
 # AR_REGISTRY="${REGION}-docker.pkg.dev"

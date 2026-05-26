@@ -39,5 +39,6 @@ CONTAINER_PORT3="8003"
 
 
 
-CLUSTER_NAME="draud-detect" # 
+CLUSTER_NAME="draud-detect" 
+POOL_NAME="pool1"
 

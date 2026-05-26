@@ -9,7 +9,14 @@ spec:
     kind: Deployment
     name: load-gen-depl
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 30
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
   metrics:
   - type: Resource
     resource:

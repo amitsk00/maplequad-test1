@@ -21,7 +21,7 @@ def get_help():
 @app.get("/load")
 async def load_gen_default():
     """Fallback for /load that uses the default 5000000 iterations."""
-    return await load_gen(50000)
+    return await load_gen(5000000)
 
 
 
@@ -64,13 +64,13 @@ async def load_gen(iterations: int):
 
 
 
-@app.get('/help', response_class=PlainTextResponse)
-def get_help():
-    return f""" HELP
-    TEST APP 2 to try on GKE
-xyz
-123
-    """
+# @app.get('/help', response_class=PlainTextResponse)
+# def get_help():
+#     return f""" HELP
+#     TEST APP 2 to try on GKE
+# xyz
+# 123
+#     """
 
 if __name__ == "__main__":
     import uvicorn

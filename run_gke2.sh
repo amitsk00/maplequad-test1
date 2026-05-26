@@ -24,6 +24,7 @@ echo -e "${GREEN}${NEW_LINE}${NEW_LINE}Deploying to GKE...${NC}"
 # kubectl apply -f gke-app/namespace.yaml
 kubectl apply -f gke-app/deployment_load.yaml
 kubectl apply -f gke-app/service_load.yaml
+kubectl apply -f gke-app/hpa_load.yaml
 
 
 echo -e "${YELLOW}${NEW_LINE}${NEW_LINE}--------------------------------------------------${NC}"
@@ -60,3 +61,17 @@ echo -e "${YELLOW}--------------------------------------------------${NC}"
 echo -e "App URL:  ${BLUE}$LOAD_BASE_URL${NC}"
 echo -e "Docs URL: ${BLUE}$LOAD_HELP_URL${NC}"
 echo -e "${YELLOW}--------------------------------------------------${NC}"
+
+
+
+sleep 10
+echo -e "will try load testing now for the app to test HPA"
+
+LOAD_URL="http://$LOAD_EXTERNAL_IP/load/999999"
+
+# -n = Total number of requests to perform
+# -c = Number of multiple requests to make at a time (Concurrency)
+# -k = Use HTTP KeepAlive (optional, but helps avoid exhausting local ports)
+ab -n 500 -c 20 -k "${LOAD_URL}"
+
+echo -e "Test completed"
